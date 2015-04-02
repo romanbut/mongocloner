@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="debug" name="mongocloner">
+    <Properties>
+        <Property name="logPath">logs</Property>
+        <Property name="logName">mongocloner</Property>
+        <Property name="logPattern">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="fileLog" fileName="${logPath}/${logName}.log"
+                     filePattern="${logPath}/${logName}-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>${logPattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}"/>
+        </Console>
+        <Async name="ConsoleAsync">
+            <AppenderRef ref="Console"/>
+        </Async>
+        <Async name="fileLogAsync">
+            <AppenderRef ref="fileLog"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.publicreputation" level="debug" additivity="false">
+            <AppenderRef ref="fileLogAsync" level="debug"/>
+            <AppenderRef ref="ConsoleAsync" level="debug"/>
+        </Logger>
+
+        <Root level="warn" additivity="false">
+            <AppenderRef ref="ConsoleAsync" level="warn"/>
+        </Root>
+    </Loggers>
+</Configuration>

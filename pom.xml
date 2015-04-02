@@ -33,6 +33,7 @@
         <version.log4j>2.2</version.log4j>
         <version.infinispan>7.1.1.Final</version.infinispan>
         <version.commons.dbcp2>2.1</version.commons.dbcp2>
+        <version.mongodb.driver>2.13.0</version.mongodb.driver>
     </properties>
 
     <dependencies>
@@ -65,8 +66,7 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
-            <version>2.13.0</version>
-            <!--<version>3.0.0-rc1</version>-->
+            <version>${version.mongodb.driver}</version>
         </dependency>
     </dependencies>
     <build>
@@ -84,7 +84,7 @@
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <createSourcesJar>false</createSourcesJar>
-                            <minimizeJar>false</minimizeJar>
+                            <minimizeJar>true</minimizeJar>
                             <finalName>${project.artifactId}</finalName>
                             <artifactSet>
                                 <excludes>
